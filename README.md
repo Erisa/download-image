@@ -9,7 +9,7 @@ Because I wanted it, and so I made it. This simple idea for an extension was bor
 - Download an image from context menu without a save prompt.
 
 ## Screenshot
-This will look similar on other browsers (Like Chrome), but I decided not to include too many images to make the repository too large.
+This will look similar on other browsers (Like Chrome), but I decided not to include too many images to make the repository too large.  
 ![An example screenshot of a right click menu which has "Download image" at the bottom](/.github-resources/example.png)
 
 ## Download
