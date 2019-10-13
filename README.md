@@ -17,12 +17,12 @@ This will look similar on other browsers (Like Chrome), but I decided not to inc
 ### Mozilla Firefox (Desktop)
 Grab a signed XPI from the official [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/download-image/) website, or from the [Releases](https://github.com/Erisa/download-image/releases) section.
 
-### Google Chrome / Chromium / Opera / Vivaldi / Brave / Microsoft Edge Canary/Dev
+### Google Chrome / Chromium / Opera / Vivaldi / Brave / Microsoft Edge Canary/Dev/Beta
 Grab a signed CRX from the official [Chrome Web Store](https://chrome.google.com/webstore/detail/download-image-from-conte/fihdnfkfpjmipmlggdknalpfjjnjbboj), or from the [Releases](https://github.com/Erisa/download-image/releases) section.
 
 ### Microsoft Edge (UWP)
-Not currently possible due to UWP Edge not supporting the [downloads.download()] function. Could be potentially explored in future by triggering the download a different way (Possibly by abusing `data:` URIs?)
-When available, it will be distributed through the Microsoft Store and possibly also this repository.
+Not possible due to UWP Edge not supporting the [downloads.download()] function. Other methods were explorered but failed (See [#4](https://github.com/Erisa/download-image/issues/4))  
+Unlikely to ever happen due to the impending release of [Edge powered by Chromium](https://support.microsoft.com/help/4501095/download-microsoft-edge-based-on-chromium).
 
 ### Mozilla Firefox (Android)
 Not possible due to Firefox for Android not supporting the `menus` API.
@@ -33,6 +33,5 @@ Also not really needed if you configure your downloads to not prompt for a filen
 - Support for `file://` URIs.
 - Generate file extensions (And possibly whole filenames) for images which don't have one.
 - Investigate issues with link images.
-- Legacy Edge support.
 - Support for video downloading.
 - Possibly work for downloading any link too, though might be out of scope.
