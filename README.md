@@ -22,7 +22,7 @@ Grab a signed CRX from the official [Chrome Web Store](https://chrome.google.com
 
 ### Microsoft Edge (UWP)
 Not possible due to UWP Edge not supporting the [downloads.download](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/downloads/download) function. Other methods were explorered but failed (See [#4](https://github.com/Erisa/download-image/issues/4))  
-Unlikely to ever happen due to the impending release of [Edge powered by Chromium](https://support.microsoft.com/help/4501095/download-microsoft-edge-based-on-chromium).
+Will never happen due to the impending release of [Edge powered by Chromium](https://blogs.windows.com/msedgedev/2019/11/04/edge-chromium-release-candidate-get-ready/).
 
 ### Mozilla Firefox (Android)
 Not possible due to Firefox for Android not supporting the `menus` API.
