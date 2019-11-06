@@ -1,5 +1,17 @@
 {
   "menuItemDownloadImage": {
     "message": "Download image"
+  },
+  "mainParagraph1": {
+    "message": "The value used here will prefix the download filename. You probably want to end this in /, not doing so will modify the filename of the downloaded images."
+  },
+  "mainParagraph2": {
+    "message": "For example setting 'folder/name' and downloading 'image.jpg' will create 'nameimage.jpg' in the directory called 'folder'."
+  },
+  "save": {
+    "message": "Save"
+  },
+  "invalid_characters": {
+    "message": "Your prefix contains invalid characters and can't be saved, please check it."
   }
 }

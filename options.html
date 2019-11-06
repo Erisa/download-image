@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Image from Context Menu</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <p id="mainPara1">The value used here will prefix the download filename. You probably want to end this in /, not doing so will
+        modify the filename of the downloaded images.</p>
+    <p id="mainPara2">For example setting 'folder/name' and downloading 'image.jpg' will create 'nameimage.jpg' in the directory called
+        'folder'.</p>
+    <form>
+        <label>File prefix: <input type="text" id="prefix"></label>
+        <button type="submit" id="saveButton">Save</button>
+        <p id="errors"></p>
+    </form>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
