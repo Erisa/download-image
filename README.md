@@ -15,10 +15,10 @@ This will look similar on other browsers (Like Chrome), but I decided not to inc
 
 ## Download
 
-Only Firefox and Chrome for desktop are officially supported. Other Chromium-based browsers will likely work by association, but they won't be tested before a new version release.  
-Other Firefox-based browsers will only work if they support WebExtensions. This includes WaterFox, but not Pale Moon. These browsers are not tested, but will likely work by association.  
-Browsers based on other engines (e.g. Safari, Internet Explorer, Edge Legacy) are not supported and will never be supported by me.  
-Mobile browsers are not supported, and never will be.
+- Only Firefox and Chrome for desktop are officially supported. Other Chromium-based browsers will likely work by association, but they won't be tested before a new version release.  
+  - Other Firefox-based browsers will only work if they support WebExtensions. This includes WaterFox, but not Pale Moon. These browsers are not tested, but will likely work by association.  
+- Browsers based on other engines (e.g. Safari, Internet Explorer, Edge Legacy) are not supported and will never be supported by me.  
+- Mobile browsers are not supported, and never will be.
 
 ### Firefox (Desktop)
 Grab a signed XPI from the official [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/download-image/) website, or from the [Releases](https://github.com/Erisa/download-image/releases) section.
