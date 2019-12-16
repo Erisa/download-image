@@ -10,7 +10,7 @@ Because I wanted it, and so I made it. This simple idea for an extension was bor
 - Choose a custom folder/filename prefix for your downloads. You can use this to put all files downloaded with the extension in a specific folder or to prefix their names with a specific string. 
 
 ## Screenshot
-This will look similar on other browsers (Like Chrome), but I decided not to include too many images to make the repository too large.  
+This will look similar on other browsers (Like Chrome), but here's one from Firefox on Windows.
 ![An example screenshot of a right click menu which has "Download image" at the bottom](/.github-resources/example.png)
 
 ## Download
