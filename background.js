@@ -29,7 +29,7 @@ function doDownload(url, prefix) {
     let base64ContentArray = url.split(",");
     let mimeType = base64ContentArray[0].match(/[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/)[0];
     ext = mimeTypes[mimeType][0];
-    var file = base64ContentArray[1].substring(0,16);
+    var file = base64ContentArray[1].substring(0,16).replace("/", "0");
     targetFilename = prefix + file + "." + ext;
 
     byteString = atob(base64ContentArray[1]);
