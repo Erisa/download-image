@@ -31,7 +31,7 @@ Grab a signed CRX from the official [Microsoft Edge Addons Store](https://micros
 
 ### Microsoft Edge Legacy (EdgeHTML, UWP)
 Not possible due to Edge Legacy not supporting the [downloads.download](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/downloads/download) function. Other methods were explorered but failed (See [#4](https://github.com/Erisa/download-image/issues/4))  
-Will never happen due to the impending release of [Edge powered by Chromium](https://blogs.windows.com/msedgedev/2019/11/04/edge-chromium-release-candidate-get-ready/).
+Will never happen due to the release of [Edge powered by Chromium](httpshttps://microsoft.com/edge).
 
 ### Firefox for Android
 Not possible due to Firefox for Android not supporting the `menus` API.
