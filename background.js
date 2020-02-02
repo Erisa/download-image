@@ -1,4 +1,5 @@
-mimeTypes = { "image/aces": ["exr"], "image/apng": ["apng"], "image/bmp": ["bmp"], "image/cgm": ["cgm"], "image/dicom-rle": ["drle"], "image/emf": ["emf"], "image/fits": ["fits"], "image/g3fax": ["g3"], "image/gif": ["gif"], "image/heic": ["heic"], "image/heic-sequence": ["heics"], "image/heif": ["heif"], "image/heif-sequence": ["heifs"], "image/ief": ["ief"], "image/jls": ["jls"], "image/jp2": ["jp2", "jpg2"], "image/jpeg": ["jpeg", "jpg", "jpe"], "image/jpm": ["jpm"], "image/jpx": ["jpx", "jpf"], "image/jxr": ["jxr"], "image/ktx": ["ktx"], "image/png": ["png"], "image/sgi": ["sgi"], "image/svg+xml": ["svg", "svgz"], "image/t38": ["t38"], "image/tiff": ["tif", "tiff"], "image/tiff-fx": ["tfx"], "image/webp": ["webp"], "image/wmf": ["wmf"] }
+const mimeTypes = { "image/aces": ["exr"], "image/apng": ["apng"], "image/bmp": ["bmp"], "image/cgm": ["cgm"], "image/dicom-rle": ["drle"], "image/emf": ["emf"], "image/fits": ["fits"], "image/g3fax": ["g3"], "image/gif": ["gif"], "image/heic": ["heic"], "image/heic-sequence": ["heics"], "image/heif": ["heif"], "image/heif-sequence": ["heifs"], "image/ief": ["ief"], "image/jls": ["jls"], "image/jp2": ["jp2", "jpg2"], "image/jpeg": ["jpeg", "jpg", "jpe"], "image/jpm": ["jpm"], "image/jpx": ["jpx", "jpf"], "image/jxr": ["jxr"], "image/ktx": ["ktx"], "image/png": ["png"], "image/sgi": ["sgi"], "image/svg+xml": ["svg", "svgz"], "image/t38": ["t38"], "image/tiff": ["tif", "tiff"], "image/tiff-fx": ["tfx"], "image/webp": ["webp"], "image/wmf": ["wmf"] }
+const validExts = ["exr", "apng", "bmp", "cgm", "drle", "emf", "fits", "g3", "gif", "heic", "heics", "heif", "ief", "jls", "jp2", "jpg2", "jpeg", "jpg", "jpe", "jpm", "jpx", "ktx", "png", "sgi", "svg", "svgz", "t38", "tif", "tiff", "tfx", "webp", "wmf"]
 
 function onError(error) {
   console.log(`Error: ${error}`);
@@ -50,12 +51,37 @@ function doDownload(url, prefix) {
   } else {
     var file = url.split('/').pop().split('#')[0].split('?')[0].replace(':', '_');
     targetFilename = prefix + file;
+
+    // check valid ext
+    let ext = targetFilename.split('.').pop();
+
+    let mimeType;
+
+    if (!validExts.includes(ext)) {
+      const request = new Request(url, { method: 'HEAD' });
+      fetch(request)
+        .then(response => {
+          mimeType = response.headers.get('content-type')
+          ext = mimeTypes[mimeType][0];
+          targetFilename = targetFilename + "." + ext;
+          console.debug(targetFilename);
+          downloadFile(url, targetFilename);
+        })
+        .catch(error => {
+          console.error(error);
+          downloadFile(url, targetFilename);
+        });
+    } else {
+      downloadFile(url, targetFilename);
+    }
+  }
+
+  function downloadFile(targetUrl, targetFilename) {
     chrome.downloads.download({
-      url: url,
+      url: targetUrl,
       conflictAction: 'uniquify',
       filename: targetFilename
     });
   }
-
 
 }

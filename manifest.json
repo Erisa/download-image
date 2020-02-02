@@ -17,7 +17,8 @@
   "permissions": [
     "contextMenus",
     "downloads",
-    "storage"
+    "storage",
+    "webRequest"
   ],
 
   "browser_specific_settings": {
