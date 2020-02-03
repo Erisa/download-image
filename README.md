@@ -45,7 +45,6 @@ Not possible due to Firefox for Android not supporting the `menus` API.
 Also not really needed if you configure your downloads to not prompt for a filename.
 
 ## Planned changes
-- Generate file extensions (And possibly whole filenames) for images which don't have one.
 - Support for video downloading.
 - Possibly work for downloading any link too, though might be out of scope.
 
