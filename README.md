@@ -48,3 +48,8 @@ Also not really needed if you configure your downloads to not prompt for a filen
 - Generate file extensions (And possibly whole filenames) for images which don't have one.
 - Support for video downloading.
 - Possibly work for downloading any link too, though might be out of scope.
+
+## Credits
+- Me! ([Erisa](https://github.com/Erisa))
+- [TorchGM](https://github.com/torchgm/) - For the beautiful icon <3
+- You! For using or considering to use my add-on! <3
