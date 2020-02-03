@@ -9,6 +9,11 @@ Because I wanted it, and so I made it. This simple idea for an extension was bor
 - Download an image from context menu without a save prompt.
 - Choose a custom folder/filename prefix for your downloads. You can use this to put all files downloaded with the extension in a specific folder or to prefix their names with a specific string. 
 
+## Notice for Firefox users
+On Firefox, the tracking protection feature will interfere with this extension when set to the "Strict" option.  
+This interference will prevent the extension from automatically generating file extensions for images that do not have them in their filename. If this happens, you may have some image downloads which do not have valid file types. This does not affect the contents of the file, and they can be opened normally if a valid extension is manually provided.  
+The only known workaround at this time is to set tracking protection to the "Standard" state.
+
 ## Screenshot
 This will look similar on other browsers (Like Chrome), but here's one from Firefox on Windows.
 ![An example screenshot of a right click menu which has "Download image" at the bottom](/.github-resources/example.png)
