@@ -1,5 +1,9 @@
 # Download Image from Context Menu
 
+[Download for Firefox](https://addons.mozilla.org/en-GB/firefox/addon/download-image/) | [Download for Chrome](https://chrome.google.com/webstore/detail/download-image-from-conte/fihdnfkfpjmipmlggdknalpfjjnjbboj) | [Download for Edge](https://microsoftedge.microsoft.com/addons/detail/blbfdbinmdelkjcfceecbjnbkdmcdmoh)
+
+<hr>
+
 This extension simply adds a context menu item which allows you to (Directly) download an image. Currently this only shows on images, and doesn't seem to work for **some** images which are also links, or for `file://` or `data:` URIs.
 
 ## Why?
