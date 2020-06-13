@@ -69,6 +69,11 @@ function doDownload(url, prefix) {
         })
         .catch(error => {
           console.error(error);
+          if (uri.searchParams.has("format")) {
+            ext = uri.searchParams.get("format");
+            targetFilename = targetFilename + "." + ext;
+            downloadFile(url, targetFilename);
+          }
           downloadFile(url, targetFilename);
         });
     } else {
