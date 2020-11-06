@@ -11,7 +11,7 @@
   "save": {
     "message": "Save"
   },
-  "invalid_characters": {
+  "path_contains_invalid_characters": {
     "message": "Your prefix contains invalid characters and can't be saved, please check it."
   }
 }
