@@ -1,0 +1,17 @@
+{
+  "menuItemDownloadImage": {
+    "message": "Pobierz obraz"
+  },
+  "mainParagraph1": {
+    "message": "Ustawiona tutaj wartość będzie poprzedzała nazwę pobranego pliku. Pewnie chcesz, żeby kończyła się /, nie zrobienie tego zmodyfikuje nazwę pobranego obrazu."
+  },
+  "mainParagraph2": {
+    "message": "Na przykład wpisując 'folder/nazwa' i pobierając 'obraz.jpg' zostanie utworzony plik 'nazwaobraz.jpg' w lokalizacji o nazwie 'folder'."
+  },
+  "save": {
+    "message": "Zapisz"
+  },
+  "invalid_characters": {
+    "message": "Twój prefiks zawiera nieprawidłowe znaki i nie może być zapisany, proszę sprawdź to."
+  }
+}
