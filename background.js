@@ -49,8 +49,17 @@ function doDownload(url, prefix) {
       filename: targetFilename
     });
   } else {
+    var lastChar = url.substr(url.length - 1);
+    if (lastChar == '/') {
+      url = url.slice(0, -1);
+    }
     var file = url.split('/').pop().split('#')[0].split('?')[0].replace(':', '_');
     targetFilename = prefix + file;
+
+    if (targetFilename == "") {
+      targetFilename = "unknown"
+    }
+
 
     // check valid ext
     let ext = targetFilename.split('.').pop();
