@@ -1,5 +1,6 @@
-const mimeTypes = { "image/aces": ["exr"], "image/apng": ["apng"], "image/bmp": ["bmp"], "image/cgm": ["cgm"], "image/dicom-rle": ["drle"], "image/emf": ["emf"], "image/fits": ["fits"], "image/g3fax": ["g3"], "image/gif": ["gif"], "image/heic": ["heic"], "image/heic-sequence": ["heics"], "image/heif": ["heif"], "image/heif-sequence": ["heifs"], "image/ief": ["ief"], "image/jls": ["jls"], "image/jp2": ["jp2", "jpg2"], "image/jpeg": ["jpeg", "jpg", "jpe"], "image/jpm": ["jpm"], "image/jpx": ["jpx", "jpf"], "image/jxr": ["jxr"], "image/ktx": ["ktx"], "image/png": ["png"], "image/sgi": ["sgi"], "image/svg+xml": ["svg", "svgz"], "image/t38": ["t38"], "image/tiff": ["tif", "tiff"], "image/tiff-fx": ["tfx"], "image/webp": ["webp"], "image/wmf": ["wmf"] }
+const mimeTypeExts = { "image/aces": ["exr"], "image/apng": ["apng"], "image/bmp": ["bmp"], "image/cgm": ["cgm"], "image/dicom-rle": ["drle"], "image/emf": ["emf"], "image/fits": ["fits"], "image/g3fax": ["g3"], "image/gif": ["gif"], "image/heic": ["heic"], "image/heic-sequence": ["heics"], "image/heif": ["heif"], "image/heif-sequence": ["heifs"], "image/ief": ["ief"], "image/jls": ["jls"], "image/jp2": ["jp2", "jpg2"], "image/jpeg": ["jpeg", "jpg", "jpe"], "image/jpm": ["jpm"], "image/jpx": ["jpx", "jpf"], "image/jxr": ["jxr"], "image/ktx": ["ktx"], "image/png": ["png"], "image/sgi": ["sgi"], "image/svg+xml": ["svg", "svgz"], "image/t38": ["t38"], "image/tiff": ["tif", "tiff"], "image/tiff-fx": ["tfx"], "image/webp": ["webp"], "image/wmf": ["wmf"] }
 const validExts = ["exr", "apng", "bmp", "cgm", "drle", "emf", "fits", "g3", "gif", "heic", "heics", "heif", "ief", "jls", "jp2", "jpg2", "jpeg", "jpg", "jpe", "jpm", "jpx", "ktx", "png", "sgi", "svg", "svgz", "t38", "tif", "tiff", "tfx", "webp", "wmf"]
+const MIME_TYPE_REGEX = /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/
 
 function onError(error) {
   console.log(`Error: ${error}`);
@@ -12,81 +13,65 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  var getting = chrome.storage.sync.get("prefix", items => {
-    if (Object.keys(items).length === 0) {
-      prefix = ""
-    } else {
-      prefix = items.prefix;
-    }
-
+  chrome.storage.sync.get("prefix", items => {
+    prefix = (Object.keys(items).length == 0)? "" : items.prefix;
     doDownload(info.srcUrl, prefix);
   });
 });
 
-function doDownload(url, prefix) {
-  var targetFilename
-  let uri = new URL(url);
-  if (uri.protocol == "data:") {
-    let base64ContentArray = url.split(",");
-    let mimeType = base64ContentArray[0].match(/[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/)[0];
-    ext = mimeTypes[mimeType][0];
-    var file = base64ContentArray[1].substring(0, 16).replace("/", "0");
-    targetFilename = prefix + file + "." + ext;
-
-    byteString = atob(base64ContentArray[1]);
-
-    var ia = new Uint8Array(byteString.length);
-
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    let blob = URL.createObjectURL(new Blob([ia], { type: mimeType }));
-
+function stringToUint8Array(s) {
+  var buf = new Uint8Array(s.length);
+  for (var i = 0; i < s.length; i++) {
+    buf[i] = s.charCodeAt(i);
+  }
+  return buf;
+}
+function doDownload(url_str, prefix) {
+  const formatTargetFilename = (name, mime) => {
+    return prefix + name + "." + mimeTypeExts[mime][0];
+  }
+  const downloadFile = (targetUrl, targetFilename) => {
     chrome.downloads.download({
-      url: blob,
-      conflictAction: 'uniquify',
-      filename: targetFilename
+      url: targetUrl.href,
+      filename: targetFilename,
+      conflictAction: 'uniquify'
     });
-  } else {
-    var file = url.split('/').pop().split('#')[0].split('?')[0].replace(':', '_');
-    targetFilename = prefix + file;
+  }
+  let url = new URL(url_str);
 
-    // check valid ext
-    let ext = targetFilename.split('.').pop();
+  if (url.protocol != "data:") {
+    let filename = url_str.split('/').pop().split('#')[0].split('?')[0].replace(':', '_'); // foo/(bar.html)?a#...
+    let targetPath = prefix + filename;
 
-    let mimeType;
+    let ext = filename.split('.').pop(); // check valid ext
 
-    if (!validExts.includes(ext)) {
-      const request = new Request(url, { method: 'HEAD' });
-      fetch(request)
+    if (validExts.includes(ext)) { downloadFile(url, targetPath); }
+    else {
+      fetch(new Request(url_str, { method: 'HEAD' }))
         .then(response => {
-          mimeType = response.headers.get('content-type')
-          ext = mimeTypes[mimeType][0];
-          targetFilename = targetFilename + "." + ext;
+          let targetFilename = formatTargetFilename(filename, response.headers.get('content-type'));
           console.debug(targetFilename);
           downloadFile(url, targetFilename);
         })
         .catch(error => {
           console.error(error);
-          if (uri.searchParams.has("format")) {
-            ext = uri.searchParams.get("format");
-            targetFilename = targetFilename + "." + ext;
-            downloadFile(url, targetFilename);
+          if (url.searchParams.has("format")) {
+            downloadFile(url, formatTargetFilename(filename, url.searchParams.get("format")));
           }
-          downloadFile(url, targetFilename);
+          downloadFile(url, targetPath); // why twice???
         });
-    } else {
-      downloadFile(url, targetFilename);
     }
-  }
+  } else {
+    let mimeEndIdx = url_str.indexOf(",");
+    let mimePart = url_str.substring(0, mimeEndIdx);
+    let fileBytesB64 = url_str.substring(mimeEndIdx+1, url_str.length);
 
-  function downloadFile(targetUrl, targetFilename) {
-    chrome.downloads.download({
-      url: targetUrl,
-      conflictAction: 'uniquify',
-      filename: targetFilename
-    });
-  }
+    let mimeType = mimePart.match(MIME_TYPE_REGEX)[0];
+    var file = fileBytesB64.substring(0, 16).replace("/", "0"); // auto rename 16-chars path
 
+    let blob = new Blob([stringToUint8Array(atob(fileBytesB64))]);
+    let blobUrl = URL.createObjectURL(blob, { type: mimeType });
+
+    downloadFile(blobUrl, formatTargetFilename(prefix, file, mimeType));
+  }
 }
