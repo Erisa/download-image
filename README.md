@@ -1,6 +1,6 @@
 # Download Image from Context Menu
 
-[Download for Firefox](https://addons.mozilla.org/en-GB/firefox/addon/download-image/) | [Download for Chrome](https://chrome.google.com/webstore/detail/download-image-from-conte/fihdnfkfpjmipmlggdknalpfjjnjbboj) | [Download for Edge](https://microsoftedge.microsoft.com/addons/detail/blbfdbinmdelkjcfceecbjnbkdmcdmoh)
+[Download for Firefox](https://addons.mozilla.org/en-GB/firefox/addon/download-image/) | [Download for Chrome/Chrominum (Opera, Brave, etc.)](https://chrome.google.com/webstore/detail/download-image-from-conte/fihdnfkfpjmipmlggdknalpfjjnjbboj) | [Download for Edge](https://microsoftedge.microsoft.com/addons/detail/blbfdbinmdelkjcfceecbjnbkdmcdmoh)
 
 <hr>
 
