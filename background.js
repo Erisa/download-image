@@ -19,11 +19,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       prefix = items.prefix;
     }
 
-    doDownload(info.srcUrl, prefix);
+    doDownload(info.srcUrl, prefix, info.pageUrl);
   });
 });
 
-function doDownload(url, prefix) {
+function doDownload(url, prefix, pageUrl) {
   var targetFilename
   let uri = new URL(url);
   if (uri.protocol == "data:") {
@@ -74,27 +74,33 @@ function doDownload(url, prefix) {
           ext = mimeTypes[mimeType][0];
           targetFilename = targetFilename + "." + ext;
           console.debug(targetFilename);
-          downloadFile(url, targetFilename);
+          downloadFile(url, targetFilename, pageUrl);
         })
         .catch(error => {
           console.error(error);
           if (uri.searchParams.has("format")) {
             ext = uri.searchParams.get("format");
             targetFilename = targetFilename + "." + ext;
-            downloadFile(url, targetFilename);
+            downloadFile(url, targetFilename, pageUrl);
           }
-          downloadFile(url, targetFilename);
+          downloadFile(url, targetFilename, pageUrl);
         });
     } else {
-      downloadFile(url, targetFilename);
+      downloadFile(url, targetFilename, pageUrl);
     }
   }
 
-  function downloadFile(targetUrl, targetFilename) {
+  function downloadFile(targetUrl, targetFilename, pageUrl) {
     chrome.downloads.download({
       url: targetUrl,
       conflictAction: 'uniquify',
-      filename: targetFilename
+      filename: targetFilename,
+      headers: [
+        {
+          name: "Referer",
+          value: pageUrl
+        }
+      ]
     });
   }
 
