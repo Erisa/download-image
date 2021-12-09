@@ -91,16 +91,22 @@ function doDownload(url, prefix, pageUrl) {
   }
 
   function downloadFile(targetUrl, targetFilename, pageUrl) {
-    chrome.downloads.download({
-      url: targetUrl,
-      conflictAction: 'uniquify',
-      filename: targetFilename,
-      headers: [
+    let downloadHeaders = []
+    // If running under Firefox
+    if (typeof browser !== "undefined"){
+      downloadHeaders = [
         {
           name: "Referer",
           value: pageUrl
         }
       ]
+    }
+
+    chrome.downloads.download({
+      url: targetUrl,
+      conflictAction: 'uniquify',
+      filename: targetFilename,
+      headers: downloadHeaders
     });
   }
 
