@@ -106,7 +106,8 @@ function doDownload(url, prefix, pageUrl) {
       url: targetUrl,
       conflictAction: 'uniquify',
       filename: targetFilename,
-      headers: downloadHeaders
+      headers: downloadHeaders,
+      saveAs: false
     });
   }
 
