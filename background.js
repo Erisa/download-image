@@ -12,7 +12,7 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  var getting = chrome.storage.sync.get("prefix", items => {
+  let getting = chrome.storage.sync.get("prefix", items => {
     if (Object.keys(items).length === 0) {
       prefix = ""
     } else {
@@ -24,7 +24,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 function doDownload(url, prefix, pageUrl) {
-  var targetFilename
+  let targetFilename
   let uri = new URL(url);
   if (uri.protocol == "data:") {
     let base64ContentArray = url.split(",");
@@ -49,17 +49,14 @@ function doDownload(url, prefix, pageUrl) {
       filename: targetFilename
     });
   } else {
-    var lastChar = url.substr(url.length - 1);
-    if (lastChar == '/') {
-      url = url.slice(0, -1);
-    }
-    var file = url.split('/').pop().split('#')[0].split('?')[0].replace(':', '_');
-    targetFilename = prefix + file;
+    const urlobj = new URL(url)
+    const pathnamearray = urlobj.pathname.split('/')
+    const filename = pathnamearray.reverse().find(e => e != "");
+    targetFilename = prefix + filename;
 
     if (targetFilename == "") {
       targetFilename = "unknown"
     }
-
 
     // check valid ext
     let ext = targetFilename.split('.').pop();
