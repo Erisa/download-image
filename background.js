@@ -11,11 +11,10 @@ chrome.contextMenus.create({
   contexts: ["image"]
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   let getting = chrome.storage.sync.get("prefix", items => {
-    if (Object.keys(items).length === 0) {
-      prefix = ""
-    } else {
+    let prefix = ""
+    if (Object.keys(items).length !== 0) {
       prefix = items.prefix;
     }
 
