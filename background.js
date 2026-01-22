@@ -88,8 +88,9 @@ function doDownload(url, prefix, pageUrl) {
 
   function downloadFile(targetUrl, targetFilename, pageUrl) {
     let downloadHeaders = []
-    // If running under Firefox
-    if (typeof browser !== "undefined"){
+    
+    // add the header on Firefox only
+    if (chrome.runtime.getURL('').startsWith('moz-extension://')){
       downloadHeaders = [
         {
           name: "Referer",
